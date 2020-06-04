@@ -1,0 +1,55 @@
+# jdbc
+  spring:
+    datasource:
+      username: pm_query
+      password: )Xsy-6Jb
+      url: jdbc:oracle:thin:39.108.119.199:1521:sisdw
+      driver-class-name: oracle.jdbc.driver.OracleDriver
+
+# page helper
+  pagehelper:
+    helper-dialect: mysql
+    reasonable: true
+    support-methods-arguments: true
+    params: count=countSql
+
+  session:
+    login:
+      path:
+        exclude: /api/v1.0/oauth
+
+  oauth:
+    url:
+      redirect: http://localhost:8081
+    server: 
+      ip: localhost
+      port: 9000
+    path:
+      token: /oauth/token
+      authorize: /oauth/authorize
+      user: /user/info
+      redirect: /#/OAuth
+    client_id: curl-client
+    client_secret: client-secret
+    grant_type: authorization_code
+    response_type: code
+    scope: read write
+
+# elaticsearch config
+  es:
+    cluster:
+         name: my-estest
+    connect:
+            ip: 192.168.9.60
+            port: 9300
+    pool: 6
+
+
+
+
+
+
+
+
+
+

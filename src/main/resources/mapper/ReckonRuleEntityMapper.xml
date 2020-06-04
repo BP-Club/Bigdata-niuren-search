@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.niuren.dsapi.model.dao.ReckonRuleEntityMapper">
+    <resultMap id="BaseResultMap" type="com.niuren.dsapi.model.Entity.ReckonRuleEntity">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="temple_code" jdbcType="CHAR" property="templeCode"/>
+        <result column="tabale_name" jdbcType="VARCHAR" property="tabaleName"/>
+        <result column="task_status" jdbcType="VARCHAR" property="taskStatus"/>
+        <result column="descs" jdbcType="VARCHAR" property="descs"/>
+        <result column="creator" jdbcType="VARCHAR" property="creator"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="rule_type" property="ruleType" jdbcType="CHAR"/>
+        <result column="is_del" property="isDel" jdbcType="CHAR"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.niuren.dsapi.model.Entity.ReckonRuleEntity">
+        <result column="rule" jdbcType="LONGVARCHAR" property="rule"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, name, temple_code, tabale_name, task_status, descs, creator, create_time, update_time,rule_type,is_del
+  </sql>
+    <sql id="Blob_Column_List">
+    rule
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from reckon_rule
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="queryReckonTaskListByCon" parameterType="com.niuren.dsapi.model.Entity.ReckonRuleEntity"
+            resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from reckon_rule
+        where
+        1=1
+        <if test="creator != null and creator != '' and creator != 'admin'">
+            and creator = #{creator,jdbcType=VARCHAR}
+        </if>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from reckon_rule
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.niuren.dsapi.model.Entity.ReckonRuleEntity" useGeneratedKeys="true"
+            keyProperty="id">
+    insert into reckon_rule (id, name, temple_code,
+      tabale_name, task_status, descs,
+      creator, create_time, update_time,
+      rule, rule_type, is_del)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{templeCode,jdbcType=CHAR},
+      #{tabaleName,jdbcType=VARCHAR}, #{taskStatus,jdbcType=VARCHAR}, #{descs,jdbcType=VARCHAR},
+      #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+      #{rule,jdbcType=LONGVARCHAR},#{ruleType,jdbcType=CHAR},#{isDel,jdbcType=CHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.niuren.dsapi.model.Entity.ReckonRuleEntity"
+            useGeneratedKeys="true"
+            keyProperty="id">
+        insert into reckon_rule
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="templeCode != null">
+                temple_code,
+            </if>
+            <if test="tabaleName != null">
+                tabale_name,
+            </if>
+            <if test="taskStatus != null">
+                task_status,
+            </if>
+            <if test="descs != null">
+                descs,
+            </if>
+            <if test="creator != null">
+                creator,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="rule != null">
+                rule,
+            </if>
+            <if test="ruleType != null">
+                rule_type,
+            </if>
+            <if test="isDel != null">
+                is_del
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="templeCode != null">
+                #{templeCode,jdbcType=CHAR},
+            </if>
+            <if test="tabaleName != null">
+                #{tabaleName,jdbcType=VARCHAR},
+            </if>
+            <if test="taskStatus != null">
+                #{taskStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="descs != null">
+                #{descs,jdbcType=VARCHAR},
+            </if>
+            <if test="creator != null">
+                #{creator,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="rule != null">
+                #{rule,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="ruleType != null">
+                #{ruleType,jdbcType=CHAR},
+            </if>
+            <if test="isDel != null">
+                #{isDel,jdbcType=CHAR}
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.niuren.dsapi.model.Entity.ReckonRuleEntity">
+        update reckon_rule
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="templeCode != null">
+                temple_code = #{templeCode,jdbcType=CHAR},
+            </if>
+            <if test="tabaleName != null">
+                tabale_name = #{tabaleName,jdbcType=VARCHAR},
+            </if>
+            <if test="taskStatus != null">
+                task_status = #{taskStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="descs != null">
+                descs = #{descs,jdbcType=VARCHAR},
+            </if>
+            <if test="creator != null">
+                creator = #{creator,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="rule != null">
+                rule = #{rule,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="ruleType != null">
+                rule_type = #{ruleType,jdbcType=CHAR},
+            </if>
+            <if test="isDel != null">
+                is_del = #{isDel,jdbcType=CHAR}
+            </if>
+
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.niuren.dsapi.model.Entity.ReckonRuleEntity">
+    update reckon_rule
+    set name = #{name,jdbcType=VARCHAR},
+      temple_code = #{templeCode,jdbcType=CHAR},
+      tabale_name = #{tabaleName,jdbcType=VARCHAR},
+      task_status = #{taskStatus,jdbcType=VARCHAR},
+      descs = #{descs,jdbcType=VARCHAR},
+      is_del = #{isDel,jdbcType=CHAR},
+      rule_type = #{ruleType,jdbcType=CHAR},
+      creator = #{creator,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      rule = #{rule,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.niuren.dsapi.model.Entity.ReckonRuleEntity">
+    update reckon_rule
+    set name = #{name,jdbcType=VARCHAR},
+      temple_code = #{templeCode,jdbcType=CHAR},
+      tabale_name = #{tabaleName,jdbcType=VARCHAR},
+      task_status = #{taskStatus,jdbcType=VARCHAR},
+      descs = #{descs,jdbcType=VARCHAR},
+      is_del = #{isDel,jdbcType=CHAR},
+      rule_type = #{ruleType,jdbcType=CHAR},
+      creator = #{creator,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.niuren.dsapi.model.dao.TempleLogEntityMapper">
+    <resultMap id="BaseResultMap" type="com.niuren.dsapi.model.Entity.TempleLogEntity">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="opt_time" property="optTime" jdbcType="TIMESTAMP"/>
+        <result column="opt_status" property="optStatus" jdbcType="CHAR"/>
+        <result column="opt_name" property="optName" jdbcType="VARCHAR"/>
+        <result column="temple_code" property="templeCode" jdbcType="BIGINT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, type, opt_time, opt_status, opt_name, temple_code
+  </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from temple_log
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectListByTempleCode" resultMap="BaseResultMap"
+            parameterType="com.niuren.dsapi.model.Entity.TempleLogEntity">
+        select
+        <include refid="Base_Column_List"/>
+        from temple_log
+        where temple_code = #{templeCode,jdbcType=VARCHAR}
+        and type = #{type,jdbcType=CHAR}
+    </select>
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from temple_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.niuren.dsapi.model.Entity.TempleLogEntity">
+    insert into temple_log (id, type, opt_time, 
+      opt_status, opt_name, temple_code
+      )
+    values (#{id,jdbcType=BIGINT}, #{type,jdbcType=VARCHAR}, #{optTime,jdbcType=TIMESTAMP}, 
+      #{optStatus,jdbcType=CHAR}, #{optName,jdbcType=VARCHAR}, #{templeCode,jdbcType=BIGINT}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.niuren.dsapi.model.Entity.TempleLogEntity">
+        insert into temple_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="optTime != null">
+                opt_time,
+            </if>
+            <if test="optStatus != null">
+                opt_status,
+            </if>
+            <if test="optName != null">
+                opt_name,
+            </if>
+            <if test="templeCode != null">
+                temple_code,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="optTime != null">
+                #{optTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="optStatus != null">
+                #{optStatus,jdbcType=CHAR},
+            </if>
+            <if test="optName != null">
+                #{optName,jdbcType=VARCHAR},
+            </if>
+            <if test="templeCode != null">
+                #{templeCode,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.niuren.dsapi.model.Entity.TempleLogEntity">
+        update temple_log
+        <set>
+            <if test="type != null">
+                type = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="optTime != null">
+                opt_time = #{optTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="optStatus != null">
+                opt_status = #{optStatus,jdbcType=CHAR},
+            </if>
+            <if test="optName != null">
+                opt_name = #{optName,jdbcType=VARCHAR},
+            </if>
+            <if test="templeCode != null">
+                temple_code = #{templeCode,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.niuren.dsapi.model.Entity.TempleLogEntity">
+    update temple_log
+    set type = #{type,jdbcType=VARCHAR},
+      opt_time = #{optTime,jdbcType=TIMESTAMP},
+      opt_status = #{optStatus,jdbcType=CHAR},
+      opt_name = #{optName,jdbcType=VARCHAR},
+      temple_code = #{templeCode,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

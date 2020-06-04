@@ -1,0 +1,124 @@
+# jdbc
+  spring:
+    datasource:
+       username: XX
+       password: XX
+       url: jdbc:mysql://XXXXXXX:3306/dataapi?useUnicode=true&characterEncoding=UTF-8
+       driver-class-name: com.mysql.jdbc.Driver
+       hikari:
+         maximum-pool-size: 10
+    servlet:
+       multipart:
+       max-file-size: 110Mb
+       max-request-size: 110Mb
+  oracle:
+    datasource:
+      username: dm
+      password: dm123
+      url: jdbc:oracle:thin:@testoracle:1521:sisdw
+      driver-class-name: oracle.jdbc.driver.OracleDriver
+
+    http:
+      encoding:
+        charset: UTF-8
+        force: true
+        enabled: true
+
+  custom:
+    datasource:
+      hive:
+        driverClass: com.facebook.presto.jdbc.PrestoDriver
+        jdbcUrl: jdbc:presto://10.201.27.113:8889/hive
+        user: hadoop
+
+# page helper
+  pagehelper:
+    helper-dialect: mysql
+    reasonable: true
+    support-methods-arguments: true
+    params: count=countSql
+
+  mybatis:
+    mapper-locations: classpath:mapper/*.xml
+
+  influxDB:
+    url: http://10.201.2.181:35730
+    username: admin
+    password: admin
+    database: spark_pro
+    realTimebase: real-time-database
+    policy: default
+
+  es:
+     url: 172.16.88.126
+     port: 19200
+
+  aws:
+    filepath: /libs/hive/warehouse/bmupload
+####数据SQL打印##
+  logging:
+    level:
+       com:
+         tcc:
+           dsapi:
+             model:
+               dao: debug
+####数据仓库##
+  ecrm:
+    url: http://dwapiservice-master.prod:80
+############pass-port单点登录##############
+
+  session:
+    login:
+      path:
+        exclude: /api/v1.0/oauth
+
+  oauth:
+    url:
+      redirect: http://vue-dsapi-master-aliyun.prod.app.tcpjw.org
+      redirect_uri: http://vue-dsapi-master-aliyun.prod.app.tcpjw.org/dsapi-pm#/OAuth
+    server:
+      outerHost: oauth2-master-aliyun.prod.app.tcpjw.org
+      innerHost: oauth2-master-aliyun.prod:8080
+      outerPort: 80
+      innerPort: 8080
+    path:
+      token: /oauth/token
+      authorize: /oauth/authorize
+      user: /user/info
+      redirect: /#/OAuth
+    client_id: curl-client
+    client_secret: client-secret
+    grant_type: authorization_code
+    response_type: code
+    scope: read write
+############hbase配置##############
+  hbase:
+     zookeeper:
+        quorum:
+        port:
+############kafka单点登录##############
+  kafka01:
+    brokenlist: 172.31.7.154:9092,172.31.5.180:9092,172.31.11.238:9092,172.31.14.87:9092,172.31.5.228:9092,172.31.9.175:9092
+    zkserver:  172.31.5.180:12181,172.31.1.24:12181,172.31.14.87:12181
+############实时计算##############
+  realTime:
+    goUrl: http://172.31.11.153:8081
+
+  management:
+    endpoint:
+      metrics:
+        enabled: true
+      prometheus:
+        enabled: true
+    endpoints:
+      web:
+        exposure:
+          include: "*"
+    metrics:
+      export:
+        prometheus:
+          enabled: true
+      enable:
+        dsapi: true
+        all: true

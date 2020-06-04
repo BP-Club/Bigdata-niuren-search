@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.niuren.dsapi.model.dao.PushTaskHisEntityMapper">
+    <resultMap id="BaseResultMap" type="com.niuren.dsapi.model.Entity.PushTaskHisEntity">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="task_id" property="taskId" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="detail" property="detail" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, task_id, create_time, detail
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from push_task_his
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectByTaskId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from push_task_his
+        where task_id = #{taskId,jdbcType=BIGINT}
+    </select>
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from push_task_his
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.niuren.dsapi.model.Entity.PushTaskHisEntity">
+    insert into push_task_his (id, task_id, create_time,
+      detail)
+    values (#{id,jdbcType=BIGINT}, #{taskId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+      #{detail,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.niuren.dsapi.model.Entity.PushTaskHisEntity">
+        insert into push_task_his
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="taskId != null">
+                task_id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="detail != null">
+                detail,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="taskId != null">
+                #{taskId,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="detail != null">
+                #{detail,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.niuren.dsapi.model.Entity.PushTaskHisEntity">
+        update push_task_his
+        <set>
+            <if test="taskId != null">
+                task_id = #{taskId,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="detail != null">
+                detail = #{detail,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.niuren.dsapi.model.Entity.PushTaskHisEntity">
+    update push_task_his
+    set task_id = #{taskId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      detail = #{detail,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

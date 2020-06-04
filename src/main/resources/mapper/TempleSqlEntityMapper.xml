@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.niuren.dsapi.model.dao.TempleSqlEntityMapper">
+    <resultMap id="BaseResultMap" type="com.niuren.dsapi.model.Entity.TempleSqlEntity">
+        <id column="temple_code" property="templeCode" jdbcType="BIGINT"/>
+        <result column="source_code" property="sourceCode" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="CHAR"/>
+        <result column="descr" property="descr" jdbcType="VARCHAR"/>
+        <result column="creator" property="creator" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="is_del" property="isDel" jdbcType="CHAR"/>
+        <result column="is_open" property="isOpen" jdbcType="CHAR"/>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.niuren.dsapi.model.Entity.TempleSqlEntity" extends="BaseResultMap">
+        <result column="content" property="content" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    temple_code, source_code, type, descr, creator, create_time,is_del,is_open
+  </sql>
+    <sql id="Blob_Column_List">
+    content
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from temple_sql
+        where
+        temple_code = #{templeCode,jdbcType=BIGINT}
+    </select>
+    <!--根据名称模糊查询列表 -->
+    <select id="selectTempListByCon" resultMap="ResultMapWithBLOBs"
+            parameterType="com.niuren.dsapi.model.Entity.TempleSqlEntity">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from temple_sql
+        where
+        type = #{type,jdbcType=CHAR}
+        <if test="descr != null and descr != '' ">
+            and descr like #{descr,jdbcType=BIGINT}
+        </if>
+        <if test="sourceCode != null and sourceCode != '' ">
+            and source_code = #{sourceCode,jdbcType=VARCHAR}
+        </if>
+        <if test="creator != null and creator != '' and creator != 'admin'">
+            and ( creator = #{creator,jdbcType=VARCHAR} or is_open = '02')
+        </if>
+        ORDER BY create_time desc
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from temple_sql
+        where temple_code = #{templeCode,jdbcType=BIGINT}
+  </delete>
+
+    <insert id="insert" parameterType="com.niuren.dsapi.model.Entity.TempleSqlEntity" useGeneratedKeys="true"
+            keyProperty="templeCode">
+        insert into temple_sql (temple_code, source_code, type,
+          descr, creator, create_time,
+          content,is_del,is_open)
+        values (#{templeCode,jdbcType=BIGINT}, #{sourceCode,jdbcType=VARCHAR}, #{type,jdbcType=CHAR},
+          #{descr,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+          #{content,jdbcType=LONGVARCHAR}, #{isDel,jdbcType=CHAR}, #{isOpen,jdbcType=CHAR})
+  </insert>
+
+    <insert id="insertSelective" parameterType="com.niuren.dsapi.model.Entity.TempleSqlEntity" useGeneratedKeys="true"
+            keyProperty="templeCode">
+        insert into temple_sql
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="templeCode != null">
+                temple_code,
+            </if>
+            <if test="sourceCode != null">
+                source_code,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="descr != null">
+                descr,
+            </if>
+            <if test="creator != null">
+                creator,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="isDel != null">
+                is_del,
+            </if>
+
+            <if test="isOpen != null">
+                is_open,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="templeCode != null">
+                #{templeCode,jdbcType=BIGINT},
+            </if>
+            <if test="sourceCode != null">
+                #{sourceCode,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=CHAR},
+            </if>
+            <if test="descr != null">
+                #{descr,jdbcType=VARCHAR},
+            </if>
+            <if test="creator != null">
+                #{creator,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="isDel != null">
+                #{isDel,jdbcType=CHAR},
+            </if>
+            <if test="isOpen != null">
+                #{isOpen,jdbcType=CHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.niuren.dsapi.model.Entity.TempleSqlEntity">
+        update temple_sql
+        <set>
+            <if test="sourceCode != null">
+                source_code = #{sourceCode,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=CHAR},
+            </if>
+            <if test="descr != null">
+                descr = #{descr,jdbcType=VARCHAR},
+            </if>
+            <if test="creator != null">
+                creator = #{creator,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="isDel != null">
+                is_del = #{isDel,jdbcType=CHAR},
+            </if>
+
+            <if test="isOpen != null">
+                is_open = #{isOpen,jdbcType=CHAR},
+            </if>
+        </set>
+        where temple_code = #{templeCode,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.niuren.dsapi.model.Entity.TempleSqlEntity">
+    update temple_sql
+    set source_code = #{sourceCode,jdbcType=VARCHAR},
+      type = #{type,jdbcType=CHAR},
+      descr = #{descr,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=LONGVARCHAR},
+      is_del = #{isDel,jdbcType=CHAR},
+      is_open = #{isOpen,jdbcType=CHAR}
+    where temple_code = #{templeCode,jdbcType=BIGINT}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.niuren.dsapi.model.Entity.TempleSqlEntity">
+    update temple_sql
+    set source_code = #{sourceCode,jdbcType=VARCHAR},
+      type = #{type,jdbcType=CHAR},
+      descr = #{descr,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      is_del = #{isDel,jdbcType=CHAR},
+      is_open = #{isOpen,jdbcType=CHAR}
+    where temple_code = #{templeCode,jdbcType=BIGINT}
+  </update>
+</mapper>

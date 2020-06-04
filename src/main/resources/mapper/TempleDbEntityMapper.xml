@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.niuren.dsapi.model.dao.TempleDbEntityMapper">
+    <resultMap id="BaseResultMap" type="com.niuren.dsapi.model.Entity.TempleDbEntity">
+        <id column="source_code" jdbcType="INTEGER" property="sourceCode"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="type" jdbcType="CHAR" property="type"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="zk" jdbcType="VARCHAR" property="zk"/>
+        <result column="driver" jdbcType="VARCHAR" property="driver"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="descs" jdbcType="VARCHAR" property="descs"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="creator" jdbcType="VARCHAR" property="creator"/>
+        <result column="is_del" jdbcType="VARCHAR" property="isDel"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    source_code, name, type, url, zk, driver, username, password, descs, create_time,
+    creator, is_del
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from temple_db
+        where source_code = #{sourceCode,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectListByType" parameterType="com.niuren.dsapi.model.Entity.TempleDbEntity"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from temple_db
+        where is_del ='01'
+         and type = #{type,jdbcType=CHAR}
+        <if test="name != null">
+            and name = #{name,jdbcType=CHAR}
+        </if>
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from temple_db
+    where source_code = #{sourceCode,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.niuren.dsapi.model.Entity.TempleDbEntity">
+    insert into temple_db (source_code, name, type,
+      url, zk, driver, username,
+      password, descs, create_time,
+      creator, is_del)
+    values (#{sourceCode,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=CHAR},
+      #{url,jdbcType=VARCHAR}, #{zk,jdbcType=VARCHAR}, #{driver,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR},
+      #{password,jdbcType=VARCHAR}, #{descs,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+      #{creator,jdbcType=VARCHAR}, #{isDel,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.niuren.dsapi.model.Entity.TempleDbEntity">
+        insert into temple_db
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sourceCode != null">
+                source_code,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="zk != null">
+                zk,
+            </if>
+            <if test="driver != null">
+                driver,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="descs != null">
+                descs,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="creator != null">
+                creator,
+            </if>
+            <if test="isDel != null">
+                is_del,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sourceCode != null">
+                #{sourceCode,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=CHAR},
+            </if>
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="zk != null">
+                #{zk,jdbcType=VARCHAR},
+            </if>
+            <if test="driver != null">
+                #{driver,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="descs != null">
+                #{descs,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="creator != null">
+                #{creator,jdbcType=VARCHAR},
+            </if>
+            <if test="isDel != null">
+                #{isDel,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.niuren.dsapi.model.Entity.TempleDbEntity">
+        update temple_db
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=CHAR},
+            </if>
+            <if test="url != null">
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="zk != null">
+                zk = #{zk,jdbcType=VARCHAR},
+            </if>
+            <if test="driver != null">
+                driver = #{driver,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="descs != null">
+                descs = #{descs,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="creator != null">
+                creator = #{creator,jdbcType=VARCHAR},
+            </if>
+            <if test="isDel != null">
+                is_del = #{isDel,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where source_code = #{sourceCode,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.niuren.dsapi.model.Entity.TempleDbEntity">
+    update temple_db
+    set name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=CHAR},
+      url = #{url,jdbcType=VARCHAR},
+      zk = #{zk,jdbcType=VARCHAR},
+      driver = #{driver,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      descs = #{descs,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      creator = #{creator,jdbcType=VARCHAR},
+      is_del = #{isDel,jdbcType=VARCHAR}
+    where source_code = #{sourceCode,jdbcType=INTEGER}
+  </update>
+</mapper>
