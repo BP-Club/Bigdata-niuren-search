@@ -1,0 +1,69 @@
+{
+  "dependencies": {
+    "uview-ui": "^2.0.31"
+  },
+  "uni-app": {
+    "scripts": {
+      "devh5": {
+        "title": "开发版H5",
+        "BROWSER": "chrome",
+        "env": {
+          "UNI_PLATFORM": "h5",
+          "VUE_APP_BASE_URL": "http://192.168.0.114:8025"
+        }
+      },
+      "preh5": {
+        "title": "测试版H5",
+        "BROWSER": "chrome",
+        "env": {
+          "UNI_PLATFORM": "h5",
+          "VUE_APP_BASE_URL": "https://www.cloudskys.cn"
+        }
+      },
+      "prodh5": {
+        "title": "正式版H5",
+        "BROWSER": "chrome",
+        "env": {
+          "UNI_PLATFORM": "h5",
+          "VUE_APP_BASE_URL": "https://www.uexwash.com"
+        }
+      },
+      "devwx": {
+        "title": "开发版微信小程序",
+        "env": {
+          "UNI_PLATFORM": "mp-weixin",
+          "VUE_APP_BASE_URL": "https://www.uexwash.com"
+        }
+      },
+      "prewx": {
+        "title": "测试版微信小程序",
+        "env": {
+          "UNI_PLATFORM": "mp-weixin",
+          "VUE_APP_BASE_URL": "https://www.uexwash.com"
+        }
+      },
+      "prodwx": {
+        "title": "正式版微信小程序",
+        "env": {
+          "UNI_PLATFORM": "mp-weixin",
+          "VUE_APP_BASE_URL": "https://www.uexwash.com"
+        }
+      }
+    }
+  },
+  "name": "laundry-applet",
+  "version": "1.0.0",
+  "main": "main.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/a549543886/laundry-applet.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

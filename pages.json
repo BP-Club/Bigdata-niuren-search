@@ -1,0 +1,195 @@
+{
+	"easycom": {
+		"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
+	},
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "首页",
+				"enablePullDownRefresh": true
+			}
+		}, 
+		{
+			"path": "pages/shopping-cart/shopping-cart",
+			"style": {
+				"navigationBarTitleText": "洗衣篮",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/my-center/my-center",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		
+		}
+    ],
+	"subPackages": [{
+		"root": "subPages",
+		"pages": [{
+			"path": "order-refund/order-refund",
+			"style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+		},{
+            "path" : "agreement-details/agreement-details",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "协议详情",
+                "enablePullDownRefresh": false
+            }
+            
+        },
+		{
+			"path": "stores/stores",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": true,
+			    "navigationStyle": "custom" // 隐藏系统导航栏
+			}
+		
+		}, {
+			"path": "category/category",
+			"style": {
+				"navigationBarTitleText": "分类",
+				// "navigationStyle": "custom" ,// 隐藏系统导航栏
+				"enablePullDownRefresh": true
+			}
+		
+		}, {
+			"path": "my-order/my-order",
+			"style": {
+				"navigationBarTitleText": "我的订单",
+				"enablePullDownRefresh": true
+			}
+		
+		},
+		{
+			"path": "my-info/my-info",
+			"style": {
+				"navigationBarTitleText": "个人资料",
+				"enablePullDownRefresh": false
+			}
+		
+		},
+		{
+			"path": "add-address/add-address",
+			"style": {
+				"navigationBarTitleText": "添加地址",
+				"enablePullDownRefresh": false
+			}
+		
+		},
+		{
+			"path": "login/login",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "submit-order/submit-order",
+			"style": {
+				"navigationBarTitleText": "提交订单",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "commodity-detail/commodity-detail",
+			"style": {
+				"navigationBarTitleText": "套餐详情",
+				"enablePullDownRefresh": false
+			}
+		},
+		// {
+		// 	"path": "send-order/send-order",
+		// 	"style": {
+		// 		"navigationBarTitleText": "",
+		// 		"enablePullDownRefresh": false
+		// 	}
+		// },
+		{
+			"path": "meet/meet",
+			"style": {
+				"navigationBarTitleText": "优惠券",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "address-list/addres-list",
+			"style": {
+				"navigationBarTitleText": "地址管理",
+				"enablePullDownRefresh": false
+			}
+		}
+		,{
+		    "path" : "order-details/order-details",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "我的订单",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		// ,{
+		//     "path" : "submit-drawback/submit-drawback",
+		//     "style" :                                                                                    
+		//     {
+		//         "navigationBarTitleText": "退款申请",
+		//         "enablePullDownRefresh": false
+		//     }
+		    
+		// },
+		{
+		    "path" : "coupon/coupon",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "春季特惠",
+		        "enablePullDownRefresh": false
+		    } 
+		},{
+		    "path" : "coupon/invite",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "邀请好友",
+		        "enablePullDownRefresh": false
+		    } 
+		}]
+	}],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"color": "#333333",
+		"selectedColor": "#1A3387",
+		"position":"bottom",
+		"list": [
+			{
+				"pagePath": "pages/index/index",
+				"iconPath": "/static/icon/shouye-weixuanzhong.png",
+				"selectedIconPath": "/static/icon/shouye-xuanzhong.png",
+				"text": "首页"
+			},
+		
+			{
+				"pagePath": "pages/shopping-cart/shopping-cart",
+				"iconPath": "/static/icon/xiyilan-weixuanzhong.png",
+				"selectedIconPath": "/static/icon/xiyilan-xuanzhong.png",
+				"text": "洗衣篮"
+			},
+			{
+				"pagePath": "pages/my-center/my-center",
+				"iconPath": "/static/icon/wode-weixuanzhong.png",
+				"selectedIconPath": "/static/icon/wode-xuanzhong.png",
+				"text": "我的"
+			}
+		]
+	},
+	"uniIdRouter": {}
+}
